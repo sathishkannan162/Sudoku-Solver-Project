@@ -18,4 +18,45 @@ suite('Unit Tests', () => {
             assert.equal(SudokuSolver.validate(puzzlesAndSolutions[0][0]),'valid string');
         });
     });
+    suite('validate row placements', function(){
+        test('Handle invalid row placement',function(){
+
+        });
+        test('Handle valid row placement',function(){
+
+        });
+    });
+
+    suite('validate column placements', function(){
+        test('Handle invalid column placement',function(){
+
+        });
+        test('Handle valid column placement',function(){
+
+        });
+    })
+    suite('validate region placements', function(){
+        test('Handle invalid region placement',function(){
+
+        });
+        test('Handle valid region placement',function(){
+
+        });
+    })
+    suite('Pass strings to solver', function(){
+        test('invalid string fails the solver',function(){
+
+        });
+        test('Valid string passes the solver',function(){
+
+        });
+        
+    })
+    suite('Return solutions', function(){
+        test('Return solution for incomplete puzzle',function(){
+
+        });
+        
+    })
+    
 });
