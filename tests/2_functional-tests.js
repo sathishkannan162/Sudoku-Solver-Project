@@ -6,7 +6,8 @@ let puzzlesAndSolutions = require('../controllers/puzzle-strings');
 
 chai.use(chaiHttp);
 
-suite('Functional Tests', () => {
+suite('Functional Tests', function() {
+  this.timeout(5000);
   suite('POST /api/solve => ', function () {
     test('POST with valid puzzle string', function (done) {
       chai
