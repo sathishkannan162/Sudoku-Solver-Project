@@ -2,6 +2,12 @@
 
 **Attribution:** This project was done as a part of Quality Assurance course on Freecodecamp and is a exact replica of [https://sudoku-solver.freecodecamp.rocks/](https://sudoku-solver.freecodecamp.rocks/).
 
+This project solves a sudoku given as input by the user. It can also detect whether the  sudoku can be solved. In the puzzle string, replace the empty values with '.' and press `Solve` after inserting the puzzle string in the text area. The solution will be shown in the grid below. 
+
+You can also check whether a number can be placed at a specific positon in the grid for the puzzle string given by the user. If there is a conflict, the conflict (row, column, region or combinations of them) will be shown below after clicking the `Check Placement` button. 
+
+You can use API by sending post requests to /api/solve and /api/check to the server.
+
 
 ## User Stories Completed
 
