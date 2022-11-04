@@ -12,6 +12,10 @@ class SudokuSolver {
       return 'invalid characters';
     }
   }
+  getPosInString(row,col) {
+    let rowNum = this.getRowNum(row);
+    return (rowNum-1)*9+Number(col) -1;
+  }
   getRowNum(letter) {
     let rows = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
     return rows.indexOf(letter.toLowerCase()) + 1;
@@ -80,6 +84,21 @@ class SudokuSolver {
       return true;
     }
     return false;
+  }
+
+  checkConflict(puzzlestring,row,col,value) {
+    let conflict = []
+    if (!this.checkColPlacement(puzzlestring,row,col,value)) {
+      conflict.push('column');
+    }
+    if (!this.checkRowPlacement(puzzlestring,row,col,value)) {
+      conflict.push('row')
+    }
+    if (!this.checkRegionPlacement(puzzlestring,row,col,value)) {
+      conflict.push('region')
+    }
+    return conflict;
+    
   }
 
   solve(puzzleString) {
