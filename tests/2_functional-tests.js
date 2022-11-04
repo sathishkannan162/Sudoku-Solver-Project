@@ -65,7 +65,7 @@ suite('Functional Tests', () => {
         .post('/api/solve')
         .send({
           puzzle:
-            '..9..5.1.85.4..!.2432......1...69.83.9.....6.62.71..1945....4.37.4.3..6..',
+            '..9..5.1.85.4...2432......1...69.83.9.....6.62.71..1945....4.37.4.3..6..',
         })
         .end(function (err, res) {
           if (err) {
@@ -115,7 +115,7 @@ suite('Functional Tests', () => {
           }
           assert.equal(res.status, 200);
           assert.property(res.body, 'valid');
-          assert.equal(res.body.valid, 'true');
+          assert.isTrue(res.body.valid);
           done();
         });
     });
@@ -140,7 +140,7 @@ suite('Functional Tests', () => {
               assert.property(res.body, 'conflict');
               assert.isArray(res.body.conflict);
               assert.equal(res.body.conflict.length, 1);
-              assert.equal(res.body.valid, 'false');
+              assert.isFalse(res.body.valid);
               assert.include(res.body.conflict, 'column');
               done();
             });
@@ -164,7 +164,7 @@ suite('Functional Tests', () => {
               assert.property(res.body, 'conflict');
               assert.isArray(res.body.conflict);
               assert.equal(res.body.conflict.length, 1);
-              assert.equal(res.body.valid, 'false');
+              assert.isFalse(res.body.valid);
               assert.include(res.body.conflict, 'row');
               done();
             });
@@ -188,7 +188,7 @@ suite('Functional Tests', () => {
               assert.property(res.body, 'conflict');
               assert.isArray(res.body.conflict);
               assert.equal(res.body.conflict.length, 1);
-              assert.equal(res.body.valid, 'false');
+              assert.isFalse(res.body.valid);
               assert.include(res.body.conflict, 'region');
               done();
             });
@@ -213,7 +213,7 @@ suite('Functional Tests', () => {
           assert.property(res.body, 'conflict');
           assert.isArray(res.body.conflict);
           assert.equal(res.body.conflict.length, 2);
-          assert.equal(res.body.valid, 'false');
+          assert.isFalse(res.body.valid);
           assert.include(res.body.conflict, 'region');
           assert.include(res.body.conflict, 'column');
           done();
@@ -237,7 +237,7 @@ suite('Functional Tests', () => {
           assert.property(res.body, 'conflict');
           assert.isArray(res.body.conflict);
           assert.equal(res.body.conflict.length, 3);
-          assert.equal(res.body.valid, 'false');
+          assert.isFalse(res.body.valid);
           assert.include(res.body.conflict, 'region');
           assert.include(res.body.conflict, 'column');
           assert.include(res.body.conflict, 'row');
@@ -381,7 +381,7 @@ suite('Functional Tests', () => {
           done();
         });
     });
-    test('POST with valid placement value but value already present in puzzle', function (done) {
+    test('POST with valid placement value but value already present in puzzle, no conflicts', function (done) {
       chai
         .request(server)
         .post('/api/check')
@@ -396,11 +396,11 @@ suite('Functional Tests', () => {
           }
           assert.equal(res.status, 200);
           assert.property(res.body, 'valid');
-          assert.equal(res.body.valid, 'true');
+          assert.isTrue(res.body.valid);
           done();
         });
     });
-    test('POST with valid placement value but value already present in puzzle', function (done) {
+    test('POST with valid placement value but value already present in puzzle, one conflict', function (done) {
       chai
         .request(server)
         .post('/api/check')
@@ -416,10 +416,11 @@ suite('Functional Tests', () => {
           assert.equal(res.status, 200);
           assert.property(res.body, 'valid');
           assert.property(res.body, 'conflict');
-          assert.equal(res.body.valid, 'false');
+          assert.isFalse(res.body.valid);
+          console.log(res.body);
           assert.isArray(res.body.conflict);
           assert.equal(res.body.conflict.length, 1);
-          assert.include(res.body.include, 'column');
+          assert.include(res.body.conflict, 'column');
           done();
         });
     });
