@@ -56,7 +56,7 @@ suite('Functional Tests', function() {
           }
           assert.equal(res.status, 200);
           assert.property(res.body, 'error');
-          assert.equal(res.body.error, 'invalid characters in puzzle');
+          assert.equal(res.body.error, 'Invalid characters in puzzle');
           done();
         });
     });

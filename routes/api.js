@@ -14,10 +14,10 @@ module.exports = function (app) {
       req.body.hasOwnProperty('coordinate') &&
       req.body.hasOwnProperty('value')
     ) {
-      if (/^[a-f]\d$/i.test(req.body.coordinate)) {
-        if (/^[\.\d]*$/.test(req.body.puzzle)) {
+      if (/^[a-f][1-9]$/i.test(req.body.coordinate)) {
+        if (/^[\.1-9]*$/.test(req.body.puzzle)) {
           if (req.body.puzzle.length == 81) {
-            if (/^\d$/.test(req.body.value)) {
+            if (/^[1-9]$/.test(req.body.value)) {
               // parse coordinate
               let coordinates = [...req.body.coordinate];
               let strPos = solver.getPosInString(coordinates[0],coordinates[1]);
@@ -91,7 +91,7 @@ module.exports = function (app) {
         }
       } else {
         res.json({
-          error: 'invalid characters in puzzle',
+          error: 'Invalid characters in puzzle',
         });
       }
     } else {
